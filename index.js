@@ -24,6 +24,10 @@ async function getPuppies() {
 //2. getSelectedPuppy
 async function getSelectedPuppy(id) {
   try {
+    const response = await fetch(API + "/players/" + id);
+    const result = await response.json();
+    selectedPuppy = result.data.player;
+    render();
   } catch (error) {
     console.log(error);
   }
@@ -69,6 +73,44 @@ function roster() {
 }
 
 //2. Selected Puppy Details
+function puppyDetails() {
+  if (!selectedPuppy || !selectedPuppy.id) {
+    const $p = document.createElement("p");
+    $p.textContent = "Select a puppy to see more details!";
+    return $p;
+  }
+    const $details = document.createElement("section");
+  $details.classList.add("details");
+   $details.innerHTML = `
+  <figure>
+  <img 
+  src="${selectedPuppy.imageUrl}" 
+  alt="Picture of ${selectedPuppy.name}"/>
+  </figure>
+  <div>
+    <dl class='text'>
+      <div class='selectedName'>
+        <dd>${selectedPuppy.name}</dd>
+      </div>
+      <div>
+        <dt>ID:</dt>
+        <dd>${selectedPuppy.id}</dd>
+      </div>
+      <div>
+        <dt>Breed:</dt>
+        <dd>${selectedPuppy.breed}</dd>
+      </div>
+      <div>
+        <dt>Status:</dt>
+        <dd>${selectedPuppy.status}</dd>
+      </div>
+    </dl>
+  </div>
+  `;
+
+  return $details;
+};
+
 
 //3. New Puppy Submission Form
 
@@ -84,9 +126,14 @@ function render() {
     <h2>Puppies</h2>
     <Puppies></Puppies>
     </section>
+    <section id='details'>
+    <h2>Selected Puppy</h2>
+    <SelectedPuppy></SelectedPuppy>
+    </section>
   </main>
   `;
    $app.querySelector("Puppies").replaceWith(roster());
+   $app.querySelector("SelectedPuppy").replaceWith(puppyDetails());
 }
 
 //=== INITIALIZATION ===

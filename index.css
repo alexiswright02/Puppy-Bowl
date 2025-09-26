@@ -2,6 +2,7 @@
 * {
   margin: 0;
   padding: 0;
+    box-sizing: border-box;
 }
 /* MAIN APP CONTAINER */
 main {
@@ -22,6 +23,12 @@ img {
 }
 
 /* MEDIA QUERIES */
+@media (width>=768px) {
+  main {
+    padding: 0.5rem;
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
 /* ROSTER */
 /* spacing of list boxes*/
@@ -58,5 +65,30 @@ img {
 }
 
 /* SELECTED PUPPY */
+.details {
+  display: flex;
+    padding: .5rem;
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  text-align: center;
+  align-items: center;
+}
+
+.details img {
+  max-height: 40vh;
+  border-radius: 0.5rem;
+}
+
+.text {
+  margin-left: 1rem;
+  font-size: 1.25rem;
+}
+
+.selectedName {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
 
 /* SUBMISSION FORM */
