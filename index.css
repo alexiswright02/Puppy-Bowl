@@ -64,7 +64,7 @@ img {
   color: black;
 }
 
-/* SELECTED PUPPY */
+/* SELECTED DETAILS */
 .details {
   display: flex;
   padding: 0.5rem;
@@ -96,4 +96,5 @@ img {
   padding: 0.5rem;
   margin-top: 1rem;
 }
+
 /* SUBMISSION FORM */

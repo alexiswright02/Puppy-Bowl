@@ -49,6 +49,11 @@ async function removePuppy(id) {
 //4. addNewPuppy
 async function addNewPuppy(puppyData) {
   try {
+    await fetch(API + "/players", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(puppyData),
+    });
   } catch (error) {
     console.log(error);
   }
@@ -119,6 +124,48 @@ function puppyDetails() {
 }
 
 //3. New Puppy Submission Form
+function newPuppyForm() {
+    const $form = document.createElement("form");
+
+  $form.innerHTML = `
+  <label>
+    Name:
+    <input name="name" required />
+  </label>
+
+   <label>
+    Breed:
+    <input name="breed" required />
+  </label>
+
+  <label>
+    Image:
+    <input name="imageUrl" required />
+  </label>
+
+  <label>
+    Status:
+    <select name="status">
+      <option value="bench">Bench</option>
+      <option value="field">Field</option>
+    </select>
+  </label>
+
+  <button>Add Puppy</button>
+  `;
+   $form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData($form);
+    const imageUrl = data.get("imageUrl");
+    addNewPuppy({
+      name: data.get("name"),
+      breed: data.get("breed"),
+      status: data.get("status"),
+      imageUrl: imageUrl.length > 0 ? imageUrl : undefined,
+    });
+  });
+    return $form;
+};
 
 //=== RENDERING FUNCTIONS ===
 
@@ -136,10 +183,15 @@ function render() {
     <h2>Selected Puppy</h2>
     <SelectedPuppy></SelectedPuppy>
     </section>
+    <section id='form'>
+    <h2>Add a New Puppy</h2>
+    <PuppyForm></PuppyForm>
+    </section>
   </main>
   `;
   $app.querySelector("Puppies").replaceWith(roster());
   $app.querySelector("SelectedPuppy").replaceWith(puppyDetails());
+  $app.querySelector("PuppyForm").replaceWith(newPuppyForm());
 }
 
 //=== INITIALIZATION ===
