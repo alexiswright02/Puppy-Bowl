@@ -1,14 +1,61 @@
 /* FULL PAGE */
-
+* {
+  margin: 0;
+  padding: 0;
+}
 /* MAIN APP CONTAINER */
+main {
+  display: grid;
+  gap: 1rem;
+  padding: 0.5rem;
+}
 
 /* HEADERS */
+h1 {
+  text-align: center;
+}
 
 /* IMAGES */
+img {
+  max-width: 100%;
+  height: 100%;
+}
 
 /* MEDIA QUERIES */
 
 /* ROSTER */
+/* spacing of list boxes*/
+.roster {
+  display: grid;
+  gap: 1rem;
+  padding: 0.5rem;
+  list-style: none;
+}
+
+/* spacing for each box */
+.roster a {
+  display: flex;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+}
+
+.avatar {
+  width: 4rem;
+  height: 6rem;
+}
+
+.avatar img {
+  border-radius: 0.5rem;
+}
+
+.name {
+  margin-left: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: black;
+}
 
 /* SELECTED PUPPY */
 

@@ -12,6 +12,10 @@ let selectedPuppy = {};
 //1. getPuppies
 async function getPuppies() {
   try {
+    const response = await fetch(API + "/players");
+    const result = await response.json();
+    puppies = result.data.players;
+    render();
   } catch (error) {
     console.log(error);
   }
@@ -44,6 +48,25 @@ async function addNewPuppy(puppyData) {
 //=== COMPONENT FUNCTIONS ===
 
 //1. Full Roster
+function roster() {
+  const $ul = document.createElement("ul");
+  $ul.classList.add("roster");
+  const $puppies = puppies.map((puppy) => {
+    const $li = document.createElement("li");
+    $li.innerHTML = `
+      <a href="#details">
+        <figure class='avatar'>
+          <img src="${puppy.imageUrl}" alt="${puppy.name}"/>
+        </figure>
+          <span class='name'>${puppy.name}</span>
+      </a>
+      `;
+    $li.addEventListener("click", () => getSelectedPuppy(puppy.id));
+    return $li;
+  });
+  $ul.replaceChildren(...$puppies);
+  return $ul;
+}
 
 //2. Selected Puppy Details
 
@@ -51,10 +74,28 @@ async function addNewPuppy(puppyData) {
 
 //=== RENDERING FUNCTIONS ===
 
-//1. Renders the component functions to the index page
+//1. Renders each component functions to the index page
+function render() {
+    const $app = document.querySelector("#app");
+  $app.innerHTML = `
+  <h1>Puppy Bowl Roster</h1>
+  <main>
+    <section id='roster'>
+    <h2>Puppies</h2>
+    <Puppies></Puppies>
+    </section>
+  </main>
+  `;
+   $app.querySelector("Puppies").replaceWith(roster());
+}
 
 //=== INITIALIZATION ===
 
 //1. invoke getPuppies function
+async function init() {
+  await getPuppies();
+  render();
+};
 
 //2. invoke init function
+init();
