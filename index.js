@@ -36,6 +36,11 @@ async function getSelectedPuppy(id) {
 //3. removePuppy
 async function removePuppy(id) {
   try {
+    await fetch(API + "/players/" + id, {
+      method: "DELETE",
+    });
+    selectedPuppy = undefined;
+    getPuppies();
   } catch (error) {
     console.log(error);
   }
@@ -72,16 +77,16 @@ function roster() {
   return $ul;
 }
 
-//2. Selected Puppy Details
+//2. Selected Puppy Details + Remove Button
 function puppyDetails() {
   if (!selectedPuppy || !selectedPuppy.id) {
     const $p = document.createElement("p");
     $p.textContent = "Select a puppy to see more details!";
     return $p;
   }
-    const $details = document.createElement("section");
+  const $details = document.createElement("section");
   $details.classList.add("details");
-   $details.innerHTML = `
+  $details.innerHTML = `
   <figure>
   <img 
   src="${selectedPuppy.imageUrl}" 
@@ -104,13 +109,14 @@ function puppyDetails() {
         <dt>Status:</dt>
         <dd>${selectedPuppy.status}</dd>
       </div>
+      <button>Remove Player</button>
     </dl>
   </div>
   `;
-
+  const $deleteButton = $details.querySelector("button");
+  $deleteButton.addEventListener("click", () => removePuppy(selectedPuppy.id));
   return $details;
-};
-
+}
 
 //3. New Puppy Submission Form
 
@@ -118,7 +124,7 @@ function puppyDetails() {
 
 //1. Renders each component functions to the index page
 function render() {
-    const $app = document.querySelector("#app");
+  const $app = document.querySelector("#app");
   $app.innerHTML = `
   <h1>Puppy Bowl Roster</h1>
   <main>
@@ -132,8 +138,8 @@ function render() {
     </section>
   </main>
   `;
-   $app.querySelector("Puppies").replaceWith(roster());
-   $app.querySelector("SelectedPuppy").replaceWith(puppyDetails());
+  $app.querySelector("Puppies").replaceWith(roster());
+  $app.querySelector("SelectedPuppy").replaceWith(puppyDetails());
 }
 
 //=== INITIALIZATION ===
@@ -142,7 +148,7 @@ function render() {
 async function init() {
   await getPuppies();
   render();
-};
+}
 
 //2. invoke init function
 init();
