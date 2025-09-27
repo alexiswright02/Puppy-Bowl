@@ -3,17 +3,26 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: rgb(226, 185, 128);
 }
 /* MAIN APP CONTAINER */
 main {
   display: grid;
   gap: 1rem;
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
 /* HEADERS */
 h1 {
   text-align: center;
+  margin: 2rem 1rem 2rem 1rem;
+  background-color: rgb(226, 155, 55);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  background-color: rgb(226, 155, 55);
 }
 
 /* IMAGES */
@@ -25,27 +34,29 @@ img {
 /* MEDIA QUERIES */
 @media (width>=768px) {
   main {
-    padding: 0.5rem;
     grid-template-columns: 1fr 1fr;
   }
 }
 
 /* ROSTER */
-/* spacing of list boxes*/
 .roster {
   display: grid;
   gap: 1rem;
-  padding: 0.5rem;
   list-style: none;
 }
 
-/* spacing for each box */
+@media (min-width: 640px) {
+  .roster {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .roster a {
   display: flex;
   align-items: center;
   border: 2px solid black;
   border-radius: 0.5rem;
-  padding: 0.25rem;
+  padding: 0.5rem 0.75rem;
 }
 
 .avatar {
@@ -55,13 +66,19 @@ img {
 
 .avatar img {
   border-radius: 0.5rem;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .name {
-  margin-left: 1rem;
+  margin: 1rem;
   font-size: 1.25rem;
   font-weight: bold;
   color: black;
+  text-decoration: underline;
+  text-align: center;
+
 }
 
 /* SELECTED DETAILS */
@@ -70,24 +87,54 @@ img {
   padding: 0.5rem;
   border: 2px solid black;
   border-radius: 0.5rem;
-  text-align: center;
   align-items: center;
+  margin-bottom: 1rem;
+}
+
+#details > p {
+  border: 2px dashed #000000;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  min-height: 12rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
 }
 
 .details img {
-  max-height: 40vh;
+  width: 12rem;
+  height: 18rem;
   border-radius: 0.5rem;
+  margin-right: 1rem;
+  flex-shrink: 0;
 }
 
 .text {
-  margin-left: 1rem;
   font-size: 1.25rem;
+  text-align: center;
+}
+
+.details > div {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text dt {
+  font-weight: 700;
+  margin-top: 0.5rem;
+  text-decoration: underline;
 }
 
 .selectedName {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  text-decoration: underline;
 }
 
 .details button {
@@ -95,6 +142,53 @@ img {
   border-radius: 0.5rem;
   padding: 0.5rem;
   margin-top: 1rem;
+  font-family: inherit;
+  font-weight: 700;
 }
 
 /* SUBMISSION FORM */
+.form {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.form button {
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.form input {
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #000000;
+  font-size: 1.25rem;
+  font-weight: 400;
+  font-family: inherit;
+  background-color: rgb(226, 185, 128);
+}
+
+.form label {
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.form select {
+  font-size: 1.15rem;
+  font-weight: 400;
+  font-family: inherit;
+  border: 1px solid #000000;
+  border-radius: 0.25rem;
+}
+
+.form button {
+  font-size: 1.25rem;
+  font-family: inherit;
+  font-weight: 700;
+}

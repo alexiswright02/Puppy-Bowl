@@ -125,8 +125,8 @@ function puppyDetails() {
 
 //3. New Puppy Submission Form
 function newPuppyForm() {
-    const $form = document.createElement("form");
-
+  const $form = document.createElement("form");
+  $form.classList.add("form");
   $form.innerHTML = `
   <label>
     Name:
@@ -153,7 +153,7 @@ function newPuppyForm() {
 
   <button>Add Puppy</button>
   `;
-   $form.addEventListener("submit", (event) => {
+  $form.addEventListener("submit", (event) => {
     event.preventDefault();
     const data = new FormData($form);
     const imageUrl = data.get("imageUrl");
@@ -164,8 +164,8 @@ function newPuppyForm() {
       imageUrl: imageUrl.length > 0 ? imageUrl : undefined,
     });
   });
-    return $form;
-};
+  return $form;
+}
 
 //=== RENDERING FUNCTIONS ===
 
@@ -176,17 +176,21 @@ function render() {
   <h1>Puppy Bowl Roster</h1>
   <main>
     <section id='roster'>
-    <h2>Puppies</h2>
-    <Puppies></Puppies>
+      <h2>Puppies</h2>
+      <Puppies></Puppies>
     </section>
-    <section id='details'>
-    <h2>Selected Puppy</h2>
-    <SelectedPuppy></SelectedPuppy>
-    </section>
-    <section id='form'>
-    <h2>Add a New Puppy</h2>
-    <PuppyForm></PuppyForm>
-    </section>
+
+    <div id="right-column">
+      <section id='details'>
+        <h2>Selected Puppy</h2>
+        <SelectedPuppy></SelectedPuppy>
+      </section>
+
+      <section id='form'>
+        <h2>Add a New Puppy</h2>
+        <PuppyForm></PuppyForm>
+      </section>
+    </div>
   </main>
   `;
   $app.querySelector("Puppies").replaceWith(roster());
